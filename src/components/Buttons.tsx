@@ -4,10 +4,12 @@ import './Buttons.css'
 
 interface props {
     autoRotate: boolean,
-    setAutoRotate: Function
+    setAutoRotate: Function,
+    cards: boolean,
+    setCards: Function
 }
 
-const Buttons: FC<props> = ({autoRotate, setAutoRotate}: props) => {
+const Buttons: FC<props> = ({autoRotate, setAutoRotate, cards, setCards}: props) => {
 
     const [buttonStyles, setButtonStyles] = useState({})
     const [margin, setMargin] = useState({marginTop: '4rem'})
@@ -27,6 +29,9 @@ const Buttons: FC<props> = ({autoRotate, setAutoRotate}: props) => {
     <div className="buttons-wrapper" style={margin}>
         <button onClick={toggleAutoRotate} style={buttonStyles} id="auto-rotate-btn">
             AUTO ROTATE : {autoRotate?'ON':'OFF'}
+        </button>
+        <button onClick={() => setCards(!cards)}>
+            SHOWING : {cards?'CUSTOM ELEMENTS':'IMAGES'}
         </button>
         <a href="https://npmjs.com/package/react-fancy-circular-carousel" target="_blank" rel="noopener noreferrer">
             <button>

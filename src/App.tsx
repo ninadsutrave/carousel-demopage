@@ -8,14 +8,15 @@ import './App.css'
 function App() {
 
   const [autoRotate, setAutoRotate] = useState(true)
+  const [cards, setCards] = useState(false)
 
   return (
     <div className="App">
       <Header />
       <div className="wrapper-element">
-      <Carousel autoRotate={autoRotate}/>
+      <Carousel autoRotate={autoRotate} cards={cards}/>
       </div>
-      <Buttons autoRotate={autoRotate} setAutoRotate={setAutoRotate}/>
+      <Buttons autoRotate={autoRotate} setAutoRotate={setAutoRotate} cards={cards} setCards={setCards}/>
       <Footer />
     </div>
   )

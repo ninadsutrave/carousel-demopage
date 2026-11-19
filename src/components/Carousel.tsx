@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC } from 'react'
+import React, { useState, FC } from 'react'
 import FancyCarousel from 'react-fancy-circular-carousel'
 import 'react-fancy-circular-carousel/FancyCarousel.css'
 import './Carousel.css'
@@ -13,53 +13,14 @@ import image6 from '../assets/colosseum.jpg'
 import image7 from '../assets/tajmahal.jpg'
 
 interface props {
-    autoRotate: boolean
+    autoRotate: boolean,
+    cards: boolean
 }
 
-const Carousel: FC<props> = ({autoRotate}: props) => {
+const Carousel: FC<props> = ({autoRotate, cards}: props) => {
 
-    var radiusConfig = {
-        carouselRadius: 275,
-        peripheralImageRadius: 60,
-        centralImageRadius: 125
-    }
-
-    if(window.innerWidth >= 1500) {
-        radiusConfig = {
-            carouselRadius: 275,
-            peripheralImageRadius: 60,
-            centralImageRadius: 125
-        }
-    } if(window.innerWidth < 1500) {
-        radiusConfig = {
-            carouselRadius: 250,
-            peripheralImageRadius: 60,
-            centralImageRadius: 110
-        }
-    } if(window.innerWidth < 1300) {
-        radiusConfig = {
-            carouselRadius: 220,
-            peripheralImageRadius: 50,
-            centralImageRadius: 100
-        }
-    } if(window.innerWidth < 600) {
-        radiusConfig = {
-            carouselRadius: 180,
-            peripheralImageRadius: 40,
-            centralImageRadius: 80
-        }
-    } if(window.innerWidth < 500) {
-        radiusConfig = {
-            carouselRadius: 150,
-            peripheralImageRadius: 30,
-            centralImageRadius: 70
-        }
-    }
     const [focusElement, setFocusElement] = useState(0)
-    const [gap, setGap] = useState()
 
-    //const images = [image1, image2, image3, image4, image5, image6, image7]
-  
     const items = [
         {       
             name: "Great Wall of China", 
@@ -93,9 +54,22 @@ const Carousel: FC<props> = ({autoRotate}: props) => {
 
     const images = [image1, image2, image3, image4, image5, image6, image7]
 
+    // the same wonders as custom elements instead of plain images
+    const wonderCards = items.map((item, index) => (
+        <div className="wonder-card" key={item.name} style={{backgroundImage: `url(${images[index]})`}}>
+            <span>{item.name}</span>
+        </div>
+    ))
+
   return (
     <div className="carousel-section">
-        <FancyCarousel images={images} carouselRadius={radiusConfig.carouselRadius} peripheralImageRadius={radiusConfig.peripheralImageRadius} centralImageRadius={radiusConfig.centralImageRadius} setFocusElement={setFocusElement} autoRotateTime={(autoRotate?3:0)}/>
+        <div className="carousel-holder">
+            <FancyCarousel images={(cards)?undefined:images} imageAlts={items.map(item => item.name)}
+                carouselRadius={275} peripheralImageRadius={60} centralImageRadius={125}
+                setFocusElement={setFocusElement} autoRotateTime={(autoRotate?3:0)} responsive>
+                {wonderCards}
+            </FancyCarousel>
+        </div>
         <div className="info-box" style={(autoRotate)?{}:{marginTop: '-4rem', marginLeft: '-4.5rem'}}>
         <h1 className="heading">{items[focusElement].name}</h1>
         <p className="description">{items[focusElement].descp}</p>

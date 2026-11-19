@@ -7,6 +7,33 @@
     margin: 5rem 0;
   }
   
+  /* full size is 2 x (275 + 60) plus 4px of element margin; the carousel scales down below that */
+  .carousel-holder {
+    width: 674px;
+    max-width: 100%;
+  }
+
+  .wonder-card {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    container-type: inline-size;
+  }
+
+  .wonder-card span {
+    width: 100%;
+    padding: 6cqi 10cqi 14cqi;
+    background: #62332bcc;
+    color: white;
+    font-size: 11cqi;
+    font-weight: 600;
+    text-align: center;
+  }
+
   .info-box {
     background: #CB786Ca6;
     width: 600px;
